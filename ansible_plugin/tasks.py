@@ -37,7 +37,7 @@ def run(ip, name, state="latest", **kwargs):
         ctx.logger.info("No IP")
     if name is None:
         ctx.logger.info("No Name")
-    command = ['ansible', ip, '-m yum -a name="{0} state={1}"'.format(name, state)]
+    command = ['ansible', ip, '-m yum -a "name={0} state={1}"'.format(name, state)]
     ctx.logger.info('Running command: {0}.'.format(command))
     output = utils.run_command(command)
     ctx.logger.info('Command Output: {0}.'.format(output))
