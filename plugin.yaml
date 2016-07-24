@@ -1,0 +1,11 @@
+##################################################################################
+# Cloudify Ansible built in types and plugins definitions.
+##################################################################################
+    # DSL version, should appear in the main blueprint.yaml
+# and may appear in other imports. In such case, the versions must match
+tosca_definitions_version: cloudify_dsl_1_3
+
+plugins:
+  ansible:
+    executor: central_deployment_agent
+    source: https://github.com/yongbuyanqiDK/cloudify-ansible-plugin/archive/master.zip
