@@ -20,27 +20,3 @@ def ansible_playbook(playbooks, inventory=list(), **kwargs):
         output = utils.run_command(command)
         ctx.logger.info('Command Output: {0}.'.format(output))
         ctx.logger.info('Finished running the Ansible Playbook.')
-
-
-@operation
-def ansible_run(ip, name, state="latest", **kwargs):
-    """
-    run a command
-    :param ip:
-    :param name:
-    :param state:
-    :return:
-    """
-    if ip is None:
-        ctx.logger.info("No IP")
-    if name is None:
-        ctx.logger.info("No Name")
-    command = ['ansible', str(ip), '-m yum -a "name={0} state={1}"'.format(str(name), state)]
-    ctx.logger.info('Running command: {0}.'.format(command))
-    output = utils.run_command(command)
-    ctx.logger.info('Command Output: {0}.'.format(output))
-    ctx.logger.info('Finished running the Ansible Command.')
-
-
-
-
