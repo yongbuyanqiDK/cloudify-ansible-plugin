@@ -21,11 +21,9 @@ def ansible_playbook(playbooks, inventory=list(), **kwargs):
         ctx.logger.info('Command Output: {0}.'.format(output))
         ctx.logger.info('Finished running the Ansible Playbook.')
 
-    return "install success"
-
 
 @operation
-def run(ip, name, state="latest", **kwargs):
+def ansible_run(ip, name, state="latest", **kwargs):
     """
     run a command
     :param ip:
