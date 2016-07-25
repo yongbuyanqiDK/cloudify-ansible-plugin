@@ -6,7 +6,7 @@ from cloudify.decorators import operation
 
 
 @operation
-def ansible_playbook(playbooks, inventory, **kwargs):
+def ansible_playbook(playbooks, inventory=list(), **kwargs):
     """ Runs a playbook as part of a Cloudify lifecycle operation """
 
     inventory_path = utils.get_inventory_path(inventory)
