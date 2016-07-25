@@ -25,7 +25,7 @@ def ansible_playbook(playbooks, inventory, **kwargs):
 
 
 @operation
-def run(ip, name, state="latest", **kwargs):
+def ansible_run(ip, name, state="latest", **kwargs):
     """
     run a command
     :param ip:
