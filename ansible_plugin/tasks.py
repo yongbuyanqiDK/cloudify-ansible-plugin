@@ -6,10 +6,10 @@ from cloudify.decorators import operation
 
 
 @operation
-def ansible_playbook_ips(playbooks, inventory=list(), **kwargs):
+def ansible_playbook_ips(playbooks, inventorys=list(), **kwargs):
     """ Runs a playbook as part of a Cloudify lifecycle operation """
 
-    inventory_path = utils.get_ips(inventory)
+    inventory_path = utils.get_ips(inventorys)
     ctx.logger.info('Inventory path: {0}.'.format(inventory_path))
 
     for playbook in playbooks:
