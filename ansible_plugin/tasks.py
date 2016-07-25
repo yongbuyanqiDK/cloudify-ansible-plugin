@@ -25,7 +25,7 @@ from cloudify.decorators import operation
 
 
 @operation
-def ansible_playbook():
+def ansible_playbook(ip, name, state="latest", **kwargs):
     """
     run a command
     :param ip:
@@ -33,9 +33,6 @@ def ansible_playbook():
     :param state:
     :return:
     """
-    ip = "all"
-    name = "httpd"
-    state = "latest"
     if ip is None:
         ctx.logger.info("No IP")
     if name is None:
@@ -45,7 +42,6 @@ def ansible_playbook():
     output = utils.run_command(command)
     ctx.logger.info('Command Output: {0}.'.format(output))
     ctx.logger.info('Finished running the Ansible Command.')
-    return "install success"
 
 
 
