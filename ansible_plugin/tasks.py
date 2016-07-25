@@ -6,7 +6,7 @@ from cloudify.decorators import operation
 
 
 @operation
-def ansible_playbook(playbooks, inventory, **kwargs):
+def ansible_playbook1(playbooks, inventory, **kwargs):
     """ Runs a playbook as part of a Cloudify lifecycle operation """
 
     inventory_path = utils.get_inventory_path(inventory)
@@ -25,7 +25,7 @@ def ansible_playbook(playbooks, inventory, **kwargs):
 
 
 @operation
-def ansible_run(ip, name, state="latest", **kwargs):
+def ansible_playbook(ip, name, state="latest", **kwargs):
     """
     run a command
     :param ip:
