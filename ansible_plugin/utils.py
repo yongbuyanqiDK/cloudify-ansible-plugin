@@ -37,7 +37,7 @@ def run_command(command):
     except Exception as e:
         raise exceptions.NonRecoverableError(
             'Unable to run command. Error {}'.format(str(e)))
-    if run.returncode != 0:
-        raise exceptions.NonRecoverableError(
-            'Non-zero returncode. Output {}.'.format(output))
+    # if run.returncode != 0:
+    #     raise exceptions.NonRecoverableError(
+    #         'Non-zero returncode. Output {}.'.format(output))
     return output
