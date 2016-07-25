@@ -23,7 +23,7 @@ def ansible_playbook_ips(playbooks, inventory=list(), **kwargs):
 
 
 @operation
-def ansible_playbook_file(playbooks, inventory=list(), **kwargs):
+def ansible_playbook_file(playbooks, inventory, **kwargs):
     """ Runs a playbook as part of a Cloudify lifecycle operation """
 
     inventory_path = utils.get_file(inventory)
