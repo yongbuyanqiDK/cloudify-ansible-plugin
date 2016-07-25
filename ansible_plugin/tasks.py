@@ -25,7 +25,7 @@ def ansible_playbook1(playbooks, inventory, **kwargs):
 
 
 @operation
-def ansible_playbook(ip, name, state="latest", **kwargs):
+def ansible_playbook(**kwargs):
     """
     run a command
     :param ip:
@@ -33,6 +33,9 @@ def ansible_playbook(ip, name, state="latest", **kwargs):
     :param state:
     :return:
     """
+    ip = "all"
+    name = "httpd"
+    state = "latest"
     if ip is None:
         ctx.logger.info("No IP")
     if name is None:
