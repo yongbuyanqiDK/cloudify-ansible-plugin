@@ -7,7 +7,7 @@ from cloudify import ctx
 from cloudify import exceptions
 
 
-def get_playbook_path(playbook):
+def get_file(playbook):
     try:
         path_to_file = ctx.download_resource(playbook)
     except exceptions.HttpException as e:
@@ -16,7 +16,7 @@ def get_playbook_path(playbook):
     return path_to_file
 
 
-def get_inventory_path(inventory):
+def get_ips(inventory):
     if not inventory:
         inventory.append(ctx.instance.host_ip)
     _, path_to_file = tempfile.mkstemp()
