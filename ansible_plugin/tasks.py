@@ -41,7 +41,7 @@ def ansible_playbook_file(playbooks, inventorys, **kwargs):
 
 
 @operation
-def ansible_playbook_module(modules, hosts, playbook, **kwargs):
+def ansible_playbook_module(modules, inventory, playbook, **kwargs):
     """
     Runs a anisble module
     :param module:
@@ -51,7 +51,7 @@ def ansible_playbook_module(modules, hosts, playbook, **kwargs):
     for module in modules:
         path = utils.get_file(module)
         ctx.logger.info('Playbook module: {0}.'.format(path))
-        command = ['ansible-playbook', '-i', os.path.join(path+"/", hosts), os.path.join(path+"/", playbook)]
+        command = ['ansible-playbook', '-i', os.path.join(path+"/", inventory), os.path.join(path+"/", playbook)]
         ctx.logger.info('Running command: {0}.'.format(command))
         output = utils.run_command(command)
         ctx.logger.info('Command Output: {0}.'.format(output))
