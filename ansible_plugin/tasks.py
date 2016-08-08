@@ -41,18 +41,20 @@ def ansible_playbook_file(playbooks, inventorys, **kwargs):
 
 
 @operation
-def ansible_playbook_module(modules, inventory, playbook, **kwargs):
+def ansible_playbook_module(module, inventory, playbook, **kwargs):
     """
     Runs a anisble module
     :param module:
     :param kwargs:
     :return:
     """
-    for module in modules:
-        path = utils.get_file(module)
-        ctx.logger.info('Playbook module: {0}.'.format(path))
-        command = ['ansible-playbook', '-i', os.path.join(path+"/", inventory), os.path.join(path+"/", playbook)]
-        ctx.logger.info('Running command: {0}.'.format(command))
-        output = utils.run_command(command)
-        ctx.logger.info('Command Output: {0}.'.format(output))
-        ctx.logger.info('Finished running the Ansible Playbook.')
+    path = utils.get_file(module)
+    command = ["tar", "zxvf", pth]
+    output = utils.run_command(command)
+    ctx.logger.info('Command Output: {0}.'.format(output))
+    ctx.logger.info('Playbook module: {0}.'.format(path))
+    command = ['ansible-playbook', '-i', os.path.join(path+"/", inventory), os.path.join(path+"/", playbook)]
+    ctx.logger.info('Running command: {0}.'.format(command))
+    output = utils.run_command(command)
+    ctx.logger.info('Command Output: {0}.'.format(output))
+    ctx.logger.info('Finished running the Ansible Playbook.')
