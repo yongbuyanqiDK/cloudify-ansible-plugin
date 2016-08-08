@@ -54,7 +54,7 @@ def ansible_playbook_module(module, inventory, playbook, **kwargs):
     output = utils.run_command(command)
     ctx.logger.info('Command Output: {0}.'.format(output))
     ctx.logger.info('Playbook module: {0}.'.format(path))
-    command = ['ansible-playbook', '-i', os.path.join(path+"/", inventory), os.path.join(path+"/", playbook)]
+    command = ['ansible-playbook', '-i', inventory, playbook]
     ctx.logger.info('Running command: {0}.'.format(command))
     output = utils.run_command(command)
     ctx.logger.info('Command Output: {0}.'.format(output))
