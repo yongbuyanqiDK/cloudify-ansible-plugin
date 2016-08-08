@@ -1,4 +1,5 @@
 # -*- coding:UTF-8 -*-
+import os
 
 from cloudify import ctx
 from ansible_plugin import utils
