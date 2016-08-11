@@ -1,6 +1,7 @@
 # -*- coding:UTF-8 -*-
-
+import os
 import tempfile
+import uuid
 from subprocess import Popen, PIPE
 
 from cloudify import ctx
@@ -24,6 +25,22 @@ def get_ips(inventory):
         for host in inventory:
             f.write('{0}\n'.format(host))
     return path_to_file
+
+
+def get_inventory(playbook, inventory):
+    if not inventory:
+        inventory.append(ctx.instance.host_ip)
+    info = playbook.split('/')[1:-1]
+    _path = ''
+    for _ in info:
+        _path = _path + '/' + _
+    path = '{}/hosts'.format(_path) + str(uuid.uuid1())
+    os.system('touch ' + path)
+    with open(path, 'w') as f:
+        f.write('{0}\n'.format('[' + info[-1] + 'servers]'))
+        for host in inventory:
+            f.write('{0}\n'.format(host))
+    return path
 
 
 def run_command(command):

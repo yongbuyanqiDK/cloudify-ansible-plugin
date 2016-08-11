@@ -42,15 +42,16 @@ def ansible_playbook_file(playbooks, inventorys, **kwargs):
 
 
 @operation
-def ansible_playbook_module(module, inventory, playbook, **kwargs):
+def ansible_playbook_module(module, playbook, inventorys=list(),  **kwargs):
     """
     Runs a anisble module
     :param module:
     :param kwargs:
     :return:
     """
+    inventory = utils.get_inventory(playbook, inventorys)
     path = utils.get_file(module)
-    command = ["tar", "zxvf", path]
+    command = ["tar", "zxvf", path, '-C', '/opt']
     output = utils.run_command(command)
     ctx.logger.info('Command Output: {0}.'.format(output))
     ctx.logger.info('Playbook module: {0}.'.format(path))
