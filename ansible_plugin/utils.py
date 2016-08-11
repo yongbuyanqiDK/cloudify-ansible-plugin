@@ -37,7 +37,7 @@ def get_inventory(playbook, inventory):
     path = '{}/hosts'.format(_path) + str(uuid.uuid1())
     os.system('touch ' + path)
     with open(path, 'w') as f:
-        f.write('{0}\n'.format('[' + info[-1] + 'servers]'))
+        f.write('{0}\n'.format('[' + info[-1] + '-servers]'))
         for host in inventory:
             f.write('{0}\n'.format(host))
     return path
