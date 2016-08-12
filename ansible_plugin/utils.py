@@ -38,7 +38,7 @@ def get_inventory(playbook, inventory, kwargs):
     var_path = _path + '/group_vars/'
     _var_path = var_path + info[-1] + '-servers'
     if kwargs:
-        os.system('rm -rf ' + var_path)
+        os.system('rm -rf ' + var_path + '*')
         os.system('touch ' + _var_path)
         with open(_var_path, 'w') as f:
             for key in kwargs:
