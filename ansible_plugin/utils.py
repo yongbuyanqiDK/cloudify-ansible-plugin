@@ -41,8 +41,8 @@ def get_inventory(playbook, inventory, **kwargs):
         os.system('rm -rf ' + var_path + '*')
         os.system('touch ' + _var_path)
         with open(_var_path, 'w') as f:
-            for key in kwargs:
-                f.write('{0}: {1}\n'.format(key, kwargs[key]))
+            for key in kwargs['properties']:
+                f.write('{0}: {1}\n'.format(key, kwargs['properties'][key]))
         f.close()
     os.system('touch ' + path)
     with open(path, 'w') as f:

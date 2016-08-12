@@ -49,12 +49,11 @@ def ansible_playbook_module(module, playbook, inventorys=list(),  **kwargs):
     :param kwargs:
     :return:
     """
-    ctx.logger.info(**kwargs)
     path = utils.get_file(module)
     command = ["tar", "zxvf", path, '-C', '/opt']
     output = utils.run_command(command)
     ctx.logger.info('Command Output: {0}.'.format(output))
-    inventory = utils.get_inventory(playbook, inventorys, kwargs['properties'])
+    inventory = utils.get_inventory(playbook, inventorys, **kwargs)
     ctx.logger.info('Playbook module: {0}.'.format(path))
     command = ['ansible-playbook', '-i', inventory, playbook]
     ctx.logger.info('Running command: {0}.'.format(command))
