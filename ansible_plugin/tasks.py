@@ -49,6 +49,7 @@ def ansible_playbook_module(module, playbook, inventory=list(),  **kwargs):
     :param kwargs:
     :return:
     """
+    ctx.logger.info(**kwargs)
     path = utils.get_file(module)
     command = ["tar", "zxvf", path, '-C', '/opt']
     output = utils.run_command(command)
