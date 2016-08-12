@@ -27,7 +27,7 @@ def get_ips(inventory):
     return path_to_file
 
 
-def get_inventory(playbook, inventory, **kwargs):
+def get_inventory(playbook, inventory, kwargs):
     if not inventory:
         inventory.append(ctx.instance.host_ip)
     info = playbook.split('/')[1:-1]
