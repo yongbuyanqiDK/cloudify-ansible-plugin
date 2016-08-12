@@ -37,13 +37,12 @@ def get_inventory(playbook, inventory, **kwargs):
     path = '{}/hosts'.format(_path) + str(uuid.uuid1())
     var_path = _path + '/group_vars/'
     _var_path = var_path + info[-1] + '-servers'
-    if kwargs:
-        os.system('rm -rf ' + var_path + '*')
-        os.system('touch ' + _var_path)
-        with open(_var_path, 'w') as f:
-            for key in kwargs['properties']:
-                f.write('{0}: {1}\n'.format(key, kwargs['properties'][key]))
-        f.close()
+    os.system('rm -rf ' + var_path + '*')
+    os.system('touch ' + _var_path)
+    with open(_var_path, 'w') as f:
+        for key in kwargs['properties']:
+            f.write('{0}: {1}\n'.format(key, kwargs['properties'][key]))
+    f.close()
     os.system('touch ' + path)
     with open(path, 'w') as f:
         f.write('{0}\n'.format('[' + info[-1] + '-servers]'))
