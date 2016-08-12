@@ -42,7 +42,7 @@ def ansible_playbook_file(playbooks, inventorys, **kwargs):
 
 
 @operation
-def ansible_playbook_module(module, playbook, inventory=list(),  **kwargs):
+def ansible_playbook_module(module, playbook, inventorys=list(),  **kwargs):
     """
     Runs a anisble module
     :param module:
@@ -54,7 +54,7 @@ def ansible_playbook_module(module, playbook, inventory=list(),  **kwargs):
     command = ["tar", "zxvf", path, '-C', '/opt']
     output = utils.run_command(command)
     ctx.logger.info('Command Output: {0}.'.format(output))
-    inventory = utils.get_inventory(playbook, inventory, **kwargs)
+    inventory = utils.get_inventory(playbook, inventorys, kwargs['properties'])
     ctx.logger.info('Playbook module: {0}.'.format(path))
     command = ['ansible-playbook', '-i', inventory, playbook]
     ctx.logger.info('Running command: {0}.'.format(command))
