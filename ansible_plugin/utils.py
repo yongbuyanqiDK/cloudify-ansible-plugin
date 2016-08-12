@@ -27,7 +27,7 @@ def get_ips(inventory):
     return path_to_file
 
 
-def get_inventory(playbook, inventory):
+def get_inventory(playbook, inventory, **kwargs):
     if not inventory:
         inventory.append(ctx.instance.host_ip)
     info = playbook.split('/')[1:-1]
@@ -35,11 +35,21 @@ def get_inventory(playbook, inventory):
     for _ in info:
         _path = _path + '/' + _
     path = '{}/hosts'.format(_path) + str(uuid.uuid1())
+    var_path = _path + '/group_vars/'
+    _var_path = var_path + info[-1] + '-servers'
+    if kwargs:
+        os.system('rm -rf ' + var_path)
+        os.system('touch ' + _var_path)
+        with open(_var_path, 'w') as f:
+            for key in kwargs:
+                f.write('{0}: {1}\n'.format(key, kwargs[key]))
+        f.close()
     os.system('touch ' + path)
     with open(path, 'w') as f:
         f.write('{0}\n'.format('[' + info[-1] + '-servers]'))
         for host in inventory:
             f.write('{0}\n'.format(host))
+    f.close()
     return path
 
 
