@@ -42,7 +42,7 @@ def ansible_playbook_file(playbooks, inventorys, **kwargs):
 
 
 @operation
-def ansible_playbook_module(module, playbook, inventory,  **kwargs):
+def ansible_playbook_module(module, playbook, inventory=list(),  **kwargs):
     """
     Runs a anisble module
     :param module:
