@@ -49,6 +49,8 @@ def ansible_playbook_module(module, playbook, inventorys,  **kwargs):
     :param kwargs:
     :return:
     """
+    name = module.split('.')[0]
+    os.system('rm -rf /opt/' + name)
     path = utils.get_file(module)
     ctx.logger.info('Playbook module: {0}.'.format(path))
     command = ["tar", "zxvf", path, '-C', '/opt']
