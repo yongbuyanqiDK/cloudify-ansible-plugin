@@ -1,11 +1,13 @@
 # -*- coding:UTF-8 -*-
 import os
 import tempfile
-import uuid
 from subprocess import Popen, PIPE
 
+import thread
 from cloudify import ctx
 from cloudify import exceptions
+
+mylock = thread.allocate_lock()
 
 
 def get_file(playbook):
@@ -28,6 +30,7 @@ def get_ips(inventory):
 
 
 def get_inventory(playbook, inventory, **kwargs):
+    mylock.acquire()
     _path = ''
     if playbook:
         # get every path
@@ -52,6 +55,7 @@ def get_inventory(playbook, inventory, **kwargs):
             f.write('{0}\n'.format('[' + info[-1] + '-servers]'))
             f.write('{0}\n'.format(inventory))
         f.close()
+    mylock.release()
     return path
 
 
