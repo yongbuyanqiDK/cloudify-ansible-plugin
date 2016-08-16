@@ -28,26 +28,30 @@ def get_ips(inventory):
 
 
 def get_inventory(playbook, inventory, **kwargs):
-    if not inventory:
-        inventory.append(ctx.instance.host_ip)
-    info = playbook.split('/')[1:-1]
     _path = ''
-    for _ in info:
-        _path = _path + '/' + _
-    path = '{}/hosts'.format(_path) + str(uuid.uuid1())
-    var_path = _path + '/group_vars/'
-    _var_path = var_path + info[-1] + '-servers'
-    os.system('rm -rf ' + var_path + '*')
-    os.system('touch ' + _var_path)
-    with open(_var_path, 'w') as f:
-        for key in kwargs['properties']:
-            f.write('{0}: {1}\n'.format(key, kwargs['properties'][key]))
-    f.close()
-    os.system('touch ' + path)
-    with open(path, 'w') as f:
-        f.write('{0}\n'.format('[' + info[-1] + '-servers]'))
-        f.write('{0}\n'.format(inventory))
-    f.close()
+    if playbook:
+        # get every path
+        info = playbook.split('/')[1:-1]
+        # connect every path
+        for _ in info:
+            _path = _path + '/' + _
+    if kwargs:
+        var_path = _path + '/group_vars/'
+        _var_path = var_path + info[-1] + '-servers'
+        os.system('rm -rf ' + var_path + '*')
+        os.system('touch ' + _var_path)
+        with open(_var_path, 'w') as f:
+            for key in kwargs['properties']:
+                f.write('{0}: {1}\n'.format(key, kwargs['properties'][key]))
+        f.close()
+    if inventory:
+        os.system('rm -rf ' + _path + '/hosts')
+        path = '{}/hosts'.format(_path)
+        os.system('touch ' + path)
+        with open(path, 'w') as f:
+            f.write('{0}\n'.format('[' + info[-1] + '-servers]'))
+            f.write('{0}\n'.format(inventory))
+        f.close()
     return path
 
 
