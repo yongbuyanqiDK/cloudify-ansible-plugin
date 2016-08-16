@@ -29,7 +29,7 @@ def get_ips(inventory):
     return path_to_file
 
 
-def get_inventory(playbook, inventory, **kwargs):
+def get_inventory(playbook, inventorys, **kwargs):
     mylock.acquire()
     _path = ''
     if playbook:
@@ -47,13 +47,14 @@ def get_inventory(playbook, inventory, **kwargs):
             for key in kwargs['properties']:
                 f.write('{0}: {1}\n'.format(key, kwargs['properties'][key]))
         f.close()
-    if inventory:
+    if inventorys:
         os.system('rm -rf ' + _path + '/hosts')
         path = '{}/hosts'.format(_path)
         os.system('touch ' + path)
         with open(path, 'w') as f:
             f.write('{0}\n'.format('[' + info[-1] + '-servers]'))
-            f.write('{0}\n'.format(inventory))
+            for inventory in inventorys:
+                f.write('{0}\n'.format(inventory))
         f.close()
     mylock.release()
     return path
