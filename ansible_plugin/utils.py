@@ -38,7 +38,7 @@ def get_inventory(playbook, inventory, **kwargs):
         # connect every path
         for _ in info:
             _path = _path + '/' + _
-    if kwargs:
+    if kwargs is not None:
         var_path = _path + '/group_vars/'
         _var_path = var_path + info[-1] + '-servers'
         os.system('rm -rf ' + var_path + '*')
