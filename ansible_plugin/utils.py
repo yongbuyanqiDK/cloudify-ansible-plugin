@@ -59,6 +59,27 @@ def get_inventory(playbook, inventory, **kwargs):
     return path
 
 
+def get_inventory(playbook, inventory):
+    mylock.acquire()
+    _path = ''
+    if playbook:
+        # get every path
+        info = playbook.split('/')[1:-1]
+        # connect every path
+        for _ in info:
+            _path = _path + '/' + _
+    if inventory:
+        os.system('rm -rf ' + _path + '/hosts')
+        path = '{}/hosts'.format(_path)
+        os.system('touch ' + path)
+        with open(path, 'w') as f:
+            f.write('{0}\n'.format('[' + info[-1] + '-servers]'))
+            f.write('{0}\n'.format(inventory))
+        f.close()
+    mylock.release()
+    return path
+
+
 def run_command(command):
     try:
         run = Popen(command, stdout=PIPE)

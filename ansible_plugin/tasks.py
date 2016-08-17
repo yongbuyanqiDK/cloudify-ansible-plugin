@@ -70,7 +70,7 @@ def ansible_playbook_uninstall(playbook, inventorys,  **kwargs):
     :param kwargs:
     :return:
     """
-    inventory = utils.get_inventory(playbook, inventorys, **kwargs)
+    inventory = utils.get_inventory(playbook, inventorys)
     command = ['ansible-playbook', '-i', inventory, playbook]
     ctx.logger.info('Running command: {0}.'.format(command))
     output = utils.run_command(command)
