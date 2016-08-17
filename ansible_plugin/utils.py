@@ -29,7 +29,7 @@ def get_ips(inventory):
     return path_to_file
 
 
-def get_inventory(playbook, inventory, **kwargs):
+def get_inventory_1(playbook, inventory, **kwargs):
     mylock.acquire()
     _path = ''
     if playbook:
@@ -59,7 +59,7 @@ def get_inventory(playbook, inventory, **kwargs):
     return path
 
 
-def get_inventory(playbook, inventory):
+def get_inventory_2(playbook, inventory):
     mylock.acquire()
     _path = ''
     if playbook:

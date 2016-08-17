@@ -54,7 +54,7 @@ def ansible_playbook_module(module, playbook, inventorys,  **kwargs):
     command = ["tar", "zxvf", path, '-C', '/opt']
     output = utils.run_command(command)
     ctx.logger.info('Command Output: {0}.'.format(output))
-    inventory = utils.get_inventory(playbook, inventorys, **kwargs)
+    inventory = utils.get_inventory_1(playbook, inventorys, **kwargs)
     command = ['ansible-playbook', '-i', inventory, playbook]
     ctx.logger.info('Running command: {0}.'.format(command))
     output = utils.run_command(command)
@@ -70,7 +70,7 @@ def ansible_playbook_uninstall(playbook, inventorys,  **kwargs):
     :param kwargs:
     :return:
     """
-    inventory = utils.get_inventory(playbook, inventorys)
+    inventory = utils.get_inventory_2(playbook, inventorys)
     command = ['ansible-playbook', '-i', inventory, playbook]
     ctx.logger.info('Running command: {0}.'.format(command))
     output = utils.run_command(command)
